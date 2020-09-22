@@ -185,7 +185,7 @@ open class SwiftyCamViewController: UIViewController {
     public var allowAutoRotate                = false
 
     /// Specifies the [videoGravity](https://developer.apple.com/reference/avfoundation/avcapturevideopreviewlayer/1386708-videogravity) for the preview layer.
-    public var videoGravity                   : SwiftyCamVideoGravity = .resizeAspect
+    public var videoGravity                   : SwiftyCamVideoGravity = .resizeAspectFill
 
     /// Sets whether or not video recordings will record audio
     /// Setting to true will prompt user for access to microphone on View Controller launch.
@@ -303,16 +303,10 @@ open class SwiftyCamViewController: UIViewController {
 
 	override open func viewDidLoad() {
 		super.viewDidLoad()
-        previewLayer = PreviewView(frame: view.frame, videoGravity: videoGravity)
-        previewLayer.center = view.center
-        view.addSubview(previewLayer)
-        view.sendSubviewToBack(previewLayer)
+     
+	
 
-		// Add Gesture Recognizers
-
-        addGestureRecognizers()
-
-		previewLayer.session = session
+	
 
 		// Test authorization status for Camera and Micophone
 
@@ -340,7 +334,20 @@ open class SwiftyCamViewController: UIViewController {
 			self.configureSession()
 		}
 	}
+    //Customized
+   public  func customLayer(view : UIView ){
+           previewLayer = PreviewView(frame: view.frame, videoGravity: videoGravity)
+                 previewLayer.center = view.center
+                 view.addSubview(previewLayer)
+                 view.sendSubviewToBack(previewLayer)
 
+                 // Add Gesture Recognizers
+
+                 addGestureRecognizers()
+
+                 previewLayer.session = session
+       }
+    
     // MARK: ViewDidLayoutSubviews
 
     /// ViewDidLayoutSubviews() Implementation
